@@ -1,0 +1,5 @@
+15:51:39 **** Incremental Build of configuration Debug for project Converting_C++_Code_To_C ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Converting_C++_Code_To_C.o" "..\\src\\Converting_C++_Code_To_C.cpp" 
+g++ -o Converting_C++_Code_To_C.exe "src\\Converting_C++_Code_To_C.o" 
+Info: Nothing to build for Converting_C++_Code_To_C
