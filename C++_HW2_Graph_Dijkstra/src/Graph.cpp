@@ -4,14 +4,6 @@
  *  Created on: May 10, 2020
  *      Author: Mahmoud
  */
-
-/*
- * Graph.c
- *
- *  Created on: May 10, 2020
- *      Author: Mahmoud
- */
-
 #include <vector>
 #include <cassert>
 #include <ctime>
@@ -20,8 +12,6 @@
 #include "Graph.h"
 
 using namespace std;
-
-#define RANGE  10
 
 
 Graph::Graph(int verticeNum): verSize(verticeNum)
@@ -64,7 +54,7 @@ Graph::Graph(int verticeNum, double density): verSize(verticeNum)
 
 				if (prob < density)
 				{
-					int weight = randNum % RANGE + 1;
+					int weight = randNum % 10 + 1;
 					addEdge(i, j, weight); // add edge in both way
 				}
 			}
@@ -87,17 +77,6 @@ bool Graph::adjacent(int src, int des) const
 		next = next->next;
 	}
 
-		// added to use in directed graph
-	//	next = vertexList[des]->next;
-	//	while (	next != nullptr)
-	//	{
-	//		if(next->data == src)
-	//		{
-	//			return true;
-	//		}
-	//		next = next->next;
-	//	}
-	//	return false;
 }
 
 vector<int> Graph::neighbors(int src) const
@@ -232,11 +211,5 @@ int Graph::getEdgeValue(int src, int des) const
 	}
 	return 0;
 }
-/*
-void Graph::setEdgeValue(int src, int des, int weight)
-{
-	assert(x>=0 && x<verticeNum && y>=0 && y<verticeNum);
-}
 
-*/
 

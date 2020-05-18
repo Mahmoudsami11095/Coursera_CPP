@@ -10,7 +10,6 @@
 // list representation of graph
 
 #include <iostream>
-#include "Data.h"
 #include "Graph.h"
 #include "ShortestPath.h"
 
@@ -19,144 +18,34 @@ using namespace std;
 // Driver program to test above functions
 int main()
 {
-	// create the graph of 9 nodes with probaility of half edges
-//	Graph G(9, .5);
-//	vector<int> ver = G.neighbors(0);
-//	for (int v:ver)
-//	{
-//	    cout<<v<<" ";
-//	}
+	//different densities to test
+	double densities[] = {0.2, 0.3, 0.4, 0.5, 0.6};
+	// Number of verticeNum
+	int verticeNum = 50;
+	//use dijkstra to get the shortest path
+	ShortestPath shortestPath;
 
-
-
-//	double densities[3] = {0.2, 0.4, 0.5};
-//	int verticeNum = 50;
-//	ShortestPath sp;
-//
-//	for (int i=0; i<3; i++)
-//	{
-//		int sum = 0;
-//		int count = 0;
-//		Graph graph(verticeNum, densities[i]);
-//
-//		for (int n=1; n<50; n++)
-//		{
-//			int pathSize = sp.pathSize(graph, 0, n);
-//			if (pathSize != INFINITY)
-//			{
-//				sum += pathSize;
-//				count++;
-//			}
-//		}
-//
-//		cout << "For the graph with density = " << densities[i];
-//		cout << ", the average path length = " <<
-//			(static_cast<double>(sum) / count) << endl;
-//	}
-
-
-
-	// create the graph of 9 nodes with probaility of half edges
-	Graph G(9);
-	G.addEdge(0, 1, 4);
-	G.addEdge(0, 7, 8);
-	G.addEdge(1, 2, 8);
-	G.addEdge(1, 7, 11);
-	G.addEdge(7, 8, 7);
-	G.addEdge(7, 6, 1);
-	G.addEdge(8, 2, 2);
-	G.addEdge(8, 6, 6);
-	G.addEdge(6, 5, 2);
-	G.addEdge(2, 3, 7);
-	G.addEdge(2, 5, 4);
-	G.addEdge(3, 5, 14);
-	G.addEdge(3, 4, 9);
-	G.addEdge(5, 4, 10);
-
-	ShortestPath sp;
-	for (int i = 1 ; i<9  ;i++)
+	for (auto den : densities)
 	{
-	    cout<<"ver "<<i<<" \nMin Distance = "<<sp.pathSize(G, 0, i)<<endl;
-	    vector<int> path = sp.path(G, 0, i);
+		int sum = 0;
+		int count = 0;
+		//create graph of 50 ver
+		Graph graph(verticeNum, den);
 
-	    cout<<"Path ";
-
-	    for(auto ver : path)
-	    {
-		    cout<<ver;
-		    if (ver != i)
-		    {
-			    cout<<" -> ";
-		    }
-
-	    }
-
-	    cout<<"\n\n";
-
-	}
-
-	//struct vernode {int src;int dis;};
-//	bool visited[9]={false,false,false,false,false,false,false,false,false};
-//	 vector<QueueNode> nodes={{0,0},{1,1},{2,2},{3,INFINITY},{4,INFINITY},{5,INFINITY},{6,INFINITY},{7,INFINITY},{8,INFINITY}};
-
-//	 PriorityQueue pq(nodes);
-//	 cout<<(pq.pop()).ver;
-//	 cout<<"\n";
-//	 cout<<(pq.pop()).priority;
-//	 cout<<"\n";
-//
-//	 cout<<(pq.top()).ver;
-//	 cout<<"\n";
-//	 cout<<(pq.top()).priority;
-/*
-	 for (int j = 0 ;  j<9 ; j++ )
-	{
-		//get min node dist and not visited yet
-		int minDis=INFINITY;
-		int minInd=INFINITY;
-		for (int i = 0 ; i<9  ;i++)
+		for (int ver=1; ver<verticeNum; ver++)
 		{
-			if (minDis> nodes[i].dis && visited[i]== false)
+			int pathSize = shortestPath.pathSize(graph, 0, ver);
+			if (pathSize != INT_MAX)
 			{
-				minDis=nodes[i].dis;
-				minInd=i;
+				sum += pathSize;
+				count++;
 			}
 		}
-		visited[minInd]= true;
-		vector<int> verNeighbors = G.neighbors(minInd);
-		for (auto ver : verNeighbors)
-		{
-			if (nodes[ver].dis > nodes[minInd].dis + G.getEdgeValue(minInd,ver)
-					&& G.getEdgeValue(minInd,ver)  && nodes[minInd].dis != INFINITY
-					&& visited[ver]== false)
-			{
-				nodes[ver].dis = nodes[minInd].dis + G.getEdgeValue(minInd,ver);
-				nodes[ver].src = minInd;
-			}
-		}
+
+		cout << "For the graph with density = " << den;
+		cout << ", the average path length = " <<
+			(static_cast<double>(sum) / count) << endl;
 	}
-
-	for (int i = 1 ; i<9  ;i++)
-	{
-	    cout<<"ver "<<i<<" \nMin Distance = "<<nodes[i].dis<<endl;
-	    cout<<"Path "<<i<<" <- " << nodes[i].src;
-
-	    int src = nodes[i].src;
-	    while (src!=0)
-	    {
-		    src = nodes[src].src;
-		    cout<<" <- "<<src;
-	    }
-	    cout<<"\n\n";
-*/
-//		if (minDis< nodes[i].dis && visited[i]== false)
-//		{
-//			minDis=nodes[i].dis;
-//			minInd=i;
-//		}
-//	    cout<<v<<" ";
-	//}
-
 	return 0;
 }
 
