@@ -11,15 +11,13 @@
 #include <vector>
 #include <cassert>
 
-#include "Data.h"
-
 //the element of priority queue
 struct QueueNode
 {
 	int ver;
 	int priority;
 
-	QueueNode(int symbol=-1, int priority=INFINITY):
+	QueueNode(int symbol=-1, int priority=INT_MAX):
 		ver(symbol), priority(priority)
 	{
 	}

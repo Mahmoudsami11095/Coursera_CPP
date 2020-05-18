@@ -9,7 +9,6 @@
 #define SHORTESTPATH_H_
 
 #include <vector>
-#include "Data.h"
 #include "Graph.h"
 #include "PriorityQueue.h"
 

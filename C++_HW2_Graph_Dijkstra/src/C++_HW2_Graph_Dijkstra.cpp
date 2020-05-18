@@ -73,10 +73,43 @@ int main()
 	G.addEdge(3, 4, 9);
 	G.addEdge(5, 4, 10);
 
-	struct vernode {int src;int dis;};
-	bool visited[9]={false,false,false,false,false,false,false,false,false};
-	vernode nodes[9]={{INFINITY,0},{INFINITY,INFINITY},{INFINITY,INFINITY},{INFINITY,INFINITY},{INFINITY,INFINITY},{INFINITY,INFINITY},{INFINITY,INFINITY},{INFINITY,INFINITY},{INFINITY,INFINITY}};
-	for (int j = 0 ;  j<9 ; j++ )
+	ShortestPath sp;
+	for (int i = 1 ; i<9  ;i++)
+	{
+	    cout<<"ver "<<i<<" \nMin Distance = "<<sp.pathSize(G, 0, i)<<endl;
+	    vector<int> path = sp.path(G, 0, i);
+
+	    cout<<"Path ";
+
+	    for(auto ver : path)
+	    {
+		    cout<<ver;
+		    if (ver != i)
+		    {
+			    cout<<" -> ";
+		    }
+
+	    }
+
+	    cout<<"\n\n";
+
+	}
+
+	//struct vernode {int src;int dis;};
+//	bool visited[9]={false,false,false,false,false,false,false,false,false};
+//	 vector<QueueNode> nodes={{0,0},{1,1},{2,2},{3,INFINITY},{4,INFINITY},{5,INFINITY},{6,INFINITY},{7,INFINITY},{8,INFINITY}};
+
+//	 PriorityQueue pq(nodes);
+//	 cout<<(pq.pop()).ver;
+//	 cout<<"\n";
+//	 cout<<(pq.pop()).priority;
+//	 cout<<"\n";
+//
+//	 cout<<(pq.top()).ver;
+//	 cout<<"\n";
+//	 cout<<(pq.top()).priority;
+/*
+	 for (int j = 0 ;  j<9 ; j++ )
 	{
 		//get min node dist and not visited yet
 		int minDis=INFINITY;
@@ -115,14 +148,14 @@ int main()
 		    cout<<" <- "<<src;
 	    }
 	    cout<<"\n\n";
-
+*/
 //		if (minDis< nodes[i].dis && visited[i]== false)
 //		{
 //			minDis=nodes[i].dis;
 //			minInd=i;
 //		}
 //	    cout<<v<<" ";
-	}
+	//}
 
 	return 0;
 }

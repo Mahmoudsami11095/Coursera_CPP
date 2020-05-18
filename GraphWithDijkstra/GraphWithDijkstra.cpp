@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "Graph.h"
+#include "ShortestPath.h"
 
 using namespace std;
 
@@ -36,50 +37,19 @@ int main()
 	G.addEdge(3, 4, 9);
 	G.addEdge(5, 4, 10);
 
-	struct vernode {int src;int dis;};
-	bool visited[9]={false,false,false,false,false,false,false,false,false};
-	vernode nodes[9]={{INT_MAX,0},{INT_MAX,INT_MAX},{INT_MAX,INT_MAX},{INT_MAX,INT_MAX},{INT_MAX,INT_MAX},{INT_MAX,INT_MAX},{INT_MAX,INT_MAX},{INT_MAX,INT_MAX},{INT_MAX,INT_MAX}};
-	for (int j = 0 ;  j<9 ; j++ )
-	{
-		//get min node dist and not visited yet
-		int minDis=INT_MAX;
-		int minInd=INT_MAX;
-		for (int i = 0 ; i<9  ;i++)
-		{
-			if (minDis> nodes[i].dis && visited[i]== false)
-			{
-				minDis=nodes[i].dis;
-				minInd=i;
-			}
-		}
-		visited[minInd]= true;
-		vector<int> verNeighbors = G.neighbors(minInd);
-		for (auto ver : verNeighbors)
-		{
-			if (nodes[ver].dis > nodes[minInd].dis + G.getEdgeValue(minInd,ver)
-					&& G.getEdgeValue(minInd,ver)  && nodes[minInd].dis != INT_MAX
-					&& visited[ver]== false)
-			{
-				nodes[ver].dis = nodes[minInd].dis + G.getEdgeValue(minInd,ver);
-				nodes[ver].src = minInd;
-			}
-		}
-	}
-
-	//print calculated data
+	ShortestPath sp;
 	for (int i = 1 ; i<9  ;i++)
 	{
-	    cout<<"ver "<<i<<" \nMin Distance = "<<nodes[i].dis<<endl;
-	    cout<<"Path "<<i<<" <- " << nodes[i].src;
+	    cout<<"ver "<<i<<" \nMin Distance = "<<sp.pathSize(G, 0, i)<<endl;
+	    vector<int> path = sp.path(G, 0, i);
 
-	    int src = nodes[i].src;
-	    while (src!=0)
+	    cout<<"Path ";
+	    for(auto ver : path)
 	    {
-		    src = nodes[src].src;
-		    cout<<" <- "<<src;
+		    cout<<ver;
+		    if (ver != i) { cout<<" -> ";  }
 	    }
 	    cout<<"\n\n";
-
 	}
 
 	return 0;

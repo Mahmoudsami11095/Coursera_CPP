@@ -17,7 +17,7 @@ vector<int> ShortestPath::path(const Graph &graph, int src, int des)
 {
 	vector<int> route;
 
-	if (dijkstra(graph, src, des) == INFINITY)
+	if (dijkstra(graph, src, des) == INT_MAX)
 	{
 		return route;
 	}
