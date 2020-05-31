@@ -28,6 +28,21 @@ Graph::Graph(int verticeNum): verSize(verticeNum)
 	}
 }
 
+Graph::Graph(std::istream  &inputStream)
+{
+	inputStream >> verSize;
+	if (checkVerticeNum() == false)
+	{
+		return;
+	}
+
+	int i, j, value;
+	while (inputStream >> i >> j >> value)
+	{
+		addEdge(i, j, value);
+	}
+}
+
 Graph::Graph(int verticeNum, double density): verSize(verticeNum)
 {
 	int i=0;
@@ -77,7 +92,6 @@ bool Graph::adjacent(int src, int des) const
 		next = next->next;
 	}
 	return false;
-
 }
 
 vector<int> Graph::neighbors(int src) const
@@ -213,4 +227,17 @@ int Graph::getEdgeValue(int src, int des) const
 	return 0;
 }
 
-
+bool Graph::checkVerticeNum()
+{
+	int i = 0 ;
+	if (verSize <= 0)
+	{
+		this->verSize = 0;
+		return false;
+	}
+	for (i=0 ; i<MAXVERTEX ; i++)
+	{
+		vertexList[i]=nullptr;
+	}
+	return true;
+}

@@ -76,6 +76,7 @@ bool Graph::adjacent(int src, int des) const
 		}
 		next = next->next;
 	}
+	return false;
 
 }
 
